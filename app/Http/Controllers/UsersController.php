@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
 
+use App\Http\Controllers\ViewsController as ViewC;
 
 class UsersController extends Controller
-{
+{   
+    
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +37,7 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function signUp(Request $request)
+    public function register(Request $request)
     {
       	$this->validate($request,[
       		'email' => 'required|unique:users',
@@ -54,9 +56,24 @@ class UsersController extends Controller
 
       	 $user->save();
 
-      	 return redirect()->route('/sign-in');
+      	 return redirect()->route('sign-in');
     }
 
+    public function login(Request $request)
+    {
+        if (Auth::attempt(['email' => $request['email'],'password' => $request['password']])) {
+            
+            return redirect()->route('dashboard');
+
+        }else {return 'FALSE';}
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+         return redirect()->route('homepage');
+    }
     /**
      * Display the specified resource.
      *

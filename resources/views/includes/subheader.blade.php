@@ -13,13 +13,23 @@
         <button type="submit" class="btn btn-danger">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <!-- <li><a href="#">Здравей <i>{{ isset($name) ? $name : 'Guest' }}</i></a></li> -->
+        
+        @if(!Auth::check())
+        <li><a href="#">Welcome, <i>Guest</i></a></li>
+        @endif
+
+        @if (Auth::check())
+        <li><a href="#">Welcome, <i>{{Auth::user()->username}}</i></a></li>
+        @else            
         <li>
+
           <div class="form-group navbar-form">
             <a href="sign-in"class="btn btn-danger">Sign in</a>
             <a href="sign-up"class="btn btn-danger">Sign up</a>
           </div>
         </li>
+        @endif
+         @if (Auth::check())
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Профил <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -27,9 +37,10 @@
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Изход</a></li>
+            <li><a href="{{route('logout')}}">Logout</a></li>
           </ul>
         </li>
+        @endif
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

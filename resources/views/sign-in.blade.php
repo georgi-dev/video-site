@@ -6,7 +6,7 @@
     <div class="row">
     	<div class="col-md-3" style="margin-left: 4%;">
     		<h3>Sign In</h3>
-    		<form  method="post" action="" style="line-height: 239%;">
+    		<form  method="post" action="{{route('login')}}" style="line-height: 239%;">
     			<div class="for-group">
 	    			<label for="email">Your E-mail</label>
 	    			<input class="form-control" type="text" name="email" id="email">

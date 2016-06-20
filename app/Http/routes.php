@@ -11,15 +11,38 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+	'uses' => 'ViewsController@toHomePage',
+	'as' => 'homepage'
+	]);
 
-Route::get('/sign-up',function() { return view('sign-up'); } );
 
-Route::get('/sign-in',function() { return view('sign-in'); } );
 
-Route::post('/sign_up',[
-	'uses' => 'UsersController@signUp',
-	'as' => 'sign_up'
+
+Route::get('/sign-up',[
+	'uses' => 'ViewsController@toRegisterPage',
+	'as' => 'sign-up'
+	]);
+Route::get('/sign-in',[
+	'uses' => 'ViewsController@toLoginPage',
+	'as' => 'sign-in'
+	]);
+Route::get('/dashboard',[
+	'uses' => 'ViewsController@toDashboard',
+	'as' => 'dashboard'
+	]);
+
+
+Route::post('/register',[
+	'uses' => 'UsersController@register',
+	'as' => 'register'
+	]);
+Route::post('/login',[
+	'uses' => 'UsersController@login',
+	'as' => 'login'
+	]);
+
+Route::get('/logout',[
+	'uses' => 'UsersController@logout',
+	'as' => 'logout'
 	]);
